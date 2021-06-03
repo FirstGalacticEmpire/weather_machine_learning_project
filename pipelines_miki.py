@@ -50,8 +50,7 @@ class RemoveOutliers():
         for col in self.columns:
             mean, std = self.MeanAndStd[col]
             cutOff = std * self.scope
-            cur = cur[cur[col] >= mean - cutOff]
-            cur = cur[cur[col] <= mean + cutOff]
+            cur = cur[cur[col] >= mean - cutOff & cur[col] <= mean + cutOff & ~cur[col].isnull()]
         #print(len(cur.Location.unique()))
         print("Removed: {}".format(len(X[col]) - len(cur[col])))
         #print(len(cur[cur["RainTomorrow"] == "No"]), len(cur[cur["RainTomorrow"] == "Yes"]))
