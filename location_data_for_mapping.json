@@ -1,0 +1,198 @@
+{
+  "Albury": {
+    "latitude": -36.0804766,
+    "longitude": 146.9162795
+  },
+  "BadgerysCreek": {
+    "latitude": -33.8816671,
+    "longitude": 150.7441627
+  },
+  "Cobar": {
+    "latitude": -31.4983333,
+    "longitude": 145.8344444
+  },
+  "CoffsHarbour": {
+    "latitude": -30.2962407,
+    "longitude": 153.1135293
+  },
+  "Moree": {
+    "latitude": -29.4617202,
+    "longitude": 149.8407153
+  },
+  "Newcastle": {
+    "latitude": -32.9192953,
+    "longitude": 151.7795348
+  },
+  "NorahHead": {
+    "latitude": -33.2816667,
+    "longitude": 151.5677778
+  },
+  "NorfolkIsland": {
+    "latitude": -29.0289575,
+    "longitude": 167.9587289126371
+  },
+  "Penrith": {
+    "latitude": -33.7510792,
+    "longitude": 150.6941684
+  },
+  "Richmond": {
+    "latitude": -20.569655,
+    "longitude": 142.9283602143393
+  },
+  "Sydney": {
+    "latitude": -33.8548157,
+    "longitude": 151.2164539
+  },
+  "SydneyAirport": {
+    "latitude": -33.9498935,
+    "longitude": 151.18196819346016
+  },
+  "WaggaWagga": {
+    "latitude": -35.115,
+    "longitude": 147.3677778
+  },
+  "Williamtown": {
+    "latitude": -32.815,
+    "longitude": 151.8427778
+  },
+  "Wollongong": {
+    "latitude": -34.4243941,
+    "longitude": 150.89385
+  },
+  "Canberra": {
+    "latitude": -35.2975906,
+    "longitude": 149.1012676
+  },
+  "Tuggeranong": {
+    "latitude": -35.4209771,
+    "longitude": 149.0921341
+  },
+  "MountGinini": {
+    "latitude": -35.5297196,
+    "longitude": 148.7726345
+  },
+  "Ballarat": {
+    "latitude": -37.5622632,
+    "longitude": 143.8607215
+  },
+  "Bendigo": {
+    "latitude": -36.7588767,
+    "longitude": 144.2825931
+  },
+  "Sale": {
+    "latitude": -38.1050358,
+    "longitude": 147.0647902
+  },
+  "MelbourneAirport": {
+    "latitude": -37.667111000000006,
+    "longitude": 144.83348076679553
+  },
+  "Melbourne": {
+    "latitude": -37.8142176,
+    "longitude": 144.9631608
+  },
+  "Mildura": {
+    "latitude": -34.1847265,
+    "longitude": 142.1624972
+  },
+  "Nhil": {
+    "latitude": -35.4325283,
+    "longitude": 141.2833187
+  },
+  "Portland": {
+    "latitude": -38.3456231,
+    "longitude": 141.6042304
+  },
+  "Watsonia": {
+    "latitude": -37.7110022,
+    "longitude": 145.083635
+  },
+  "Dartmoor": {
+    "latitude": -37.9225444,
+    "longitude": 141.2766551
+  },
+  "Brisbane": {
+    "latitude": -27.4689682,
+    "longitude": 153.0234991
+  },
+  "Cairns": {
+    "latitude": -16.9206657,
+    "longitude": 145.7721854
+  },
+  "GoldCoast": {
+    "latitude": -28.0023731,
+    "longitude": 153.4145987
+  },
+  "Townsville": {
+    "latitude": -19.2569391,
+    "longitude": 146.8239537
+  },
+  "Adelaide": {
+    "latitude": -34.9281805,
+    "longitude": 138.5999312
+  },
+  "MountGambier": {
+    "latitude": -37.8246698,
+    "longitude": 140.7820067624113
+  },
+  "Nuriootpa": {
+    "latitude": -34.4693354,
+    "longitude": 138.9939006
+  },
+  "Woomera": {
+    "latitude": -31.1999142,
+    "longitude": 136.8253532
+  },
+  "Albany": {
+    "latitude": -35.0247822,
+    "longitude": 117.883608
+  },
+  "Witchcliffe": {
+    "latitude": -34.0263348,
+    "longitude": 115.1004768
+  },
+  "PearceRAAF": {
+    "latitude": -31.6739604,
+    "longitude": 116.01754351808195
+  },
+  "PerthAirport": {
+    "latitude": -31.9406095,
+    "longitude": 115.96760765137932
+  },
+  "Perth": {
+    "latitude": -31.9527121,
+    "longitude": 115.8604796
+  },
+  "SalmonGums": {
+    "latitude": -32.9815347,
+    "longitude": 121.6439417
+  },
+  "Walpole": {
+    "latitude": -34.9776796,
+    "longitude": 116.7310063
+  },
+  "Hobart": {
+    "latitude": -42.8825088,
+    "longitude": 147.3281233
+  },
+  "Launceston": {
+    "latitude": -41.4340813,
+    "longitude": 147.1373496
+  },
+  "AliceSprings": {
+    "latitude": -23.6983884,
+    "longitude": 133.8812885
+  },
+  "Darwin": {
+    "latitude": -12.46044,
+    "longitude": 130.8410469
+  },
+  "Katherine": {
+    "latitude": -14.4642313,
+    "longitude": 132.2638568
+  },
+  "Uluru": {
+    "latitude": -25.3455545,
+    "longitude": 131.03696147470208
+  }
+}
