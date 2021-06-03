@@ -31,4 +31,29 @@ class WindToDegrees():
             cur[col] = cur[col].map(self.di)
         return cur
 
-
+class RemoveOutliers():
+    def __init__(self, scope=3.5): #scope is a std multiplier - the smaller it is the more values will be treated as outliers
+        self.scope=scope
+        self.columns = []
+        self.MeanAndStd = {}
+            
+    def fit(self, X, y=None):
+        numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+        self.columns = X.select_dtypes(include=np.number).columns.tolist()
+        for col in self.columns:
+            self.MeanAndStd[col] = [X[col].mean(), X[col].std()]
+        return self
+    
+    def transform(self, X):
+        #print(len(X.Location.unique()))
+        cur = X.copy()
+        for col in self.columns:
+            mean, std = self.MeanAndStd[col]
+            cutOff = std * self.scope
+            cur = cur[cur[col] >= mean - cutOff]
+            cur = cur[cur[col] <= mean + cutOff]
+        #print(len(cur.Location.unique()))
+        print("Removed: {}".format(len(X[col]) - len(cur[col])))
+        #print(len(cur[cur["RainTomorrow"] == "No"]), len(cur[cur["RainTomorrow"] == "Yes"]))
+        #print("NAs:", cur.isna().sum())
+        return cur
