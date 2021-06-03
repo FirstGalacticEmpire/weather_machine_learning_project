@@ -3,6 +3,8 @@ from re import findall
 from geopy.geocoders import Nominatim
 import json
 import numpy as np
+from sklearn.impute import SimpleImputer
+
 
 class MaxMinTempDifference(BaseEstimator, TransformerMixin):
     def __init__(self) -> None:
@@ -135,3 +137,34 @@ class NormalizeContinuousFeatures(BaseEstimator, TransformerMixin):
         X_scaled = X.copy()
         X_scaled[self.columns_to_normalize] = self.scaler.transform(X_scaled[self.columns_to_normalize])
         return X_scaled
+
+
+class MeanNANImputer(NormalizeContinuousFeatures):
+    def __init__(self, columns_to_normalize=None) -> None:
+        super().__init__(SimpleImputer(missing_values=np.nan, strategy='mean'), columns_to_normalize)
+        if columns_to_normalize is not None:
+            self.columns_to_normalize = columns_to_normalize
+        else:
+            self.columns_to_normalize = None
+
+# class MeanNANImputer(BaseEstimator, TransformerMixin):
+#     def __init__(self, columns_to_normalize=None) -> None:
+#         self.scaler = SimpleImputer(missing_values=np.nan, strategy='mean')
+#         if columns_to_normalize is not None:
+#             self.columns_to_normalize = columns_to_normalize
+#         else:
+#             self.columns_to_normalize = None
+#
+#     def fit(self, X, y=None):
+#         if self.columns_to_normalize is not None:
+#             self.scaler.fit(X[self.columns_to_normalize])
+#         else:
+#             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+#             self.columns_to_normalize = X.select_dtypes(include=np.number).columns.tolist()
+#             self.scaler.fit(X[self.columns_to_normalize])
+#         return self
+#
+#     def transform(self, X):
+#         X_scaled = X.copy()
+#         X_scaled[self.columns_to_normalize] = self.scaler.transform(X_scaled[self.columns_to_normalize])
+#         return X_scaled
