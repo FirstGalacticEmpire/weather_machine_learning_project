@@ -165,8 +165,8 @@ class FeaturesFromDate(BaseEstimator, TransformerMixin):
         # Warning the result is sometimes negative.
         copied_dataset = X.copy()
         copied_dataset["Date"] = pd.to_datetime(copied_dataset["Date"])
-        copied_dataset['Week_Number'] = copied_dataset['Date'].dt.isocalendar().week
-        copied_dataset['Year'] = copied_dataset['Date'].dt.isocalendar().year
+        copied_dataset['Week_Number'] = pd.to_numeric(copied_dataset['Date'].dt.isocalendar().week)
+        copied_dataset['Year'] = pd.to_numeric(copied_dataset['Date'].dt.isocalendar().year)
         if self.drop_date:
             copied_dataset = copied_dataset.drop(columns=["Date"])
 
