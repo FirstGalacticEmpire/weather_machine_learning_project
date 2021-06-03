@@ -5,7 +5,7 @@ import json
 import numpy as np
 from sklearn.impute import SimpleImputer
 import pandas as pd
-
+import math
 
 class MaxMinTempDifference(BaseEstimator, TransformerMixin):
     def __init__(self) -> None:
@@ -73,9 +73,10 @@ class HumidityDailyDifference(BaseEstimator, TransformerMixin):
 
 
 class MapLocation(BaseEstimator, TransformerMixin):
-    def __init__(self, X, longitude=True, latitude=True) -> None:
+    def __init__(self, X, longitude=True, latitude=True, normalize=False) -> None:
         self.longitude = longitude
         self.latitude = latitude
+        self.normalize = normalize
         try:
             with open("location_data_for_mapping.json", "r") as file:
                 self.dict_of_locations = json.load(file)
@@ -108,11 +109,15 @@ class MapLocation(BaseEstimator, TransformerMixin):
             chosen_dataset.insert(loc=2, column="longitude", value=chosen_dataset["Location"])
             chosen_dataset["longitude"] = chosen_dataset["longitude"].apply(
                 lambda x: self.dict_of_locations[x]["longitude"])
+            if self.normalize:
+                chosen_dataset["longitude"] = chosen_dataset["longitude"].apply(lambda x: x-115.1004768)
 
         if self.latitude:
             chosen_dataset.insert(loc=2, column="latitude", value=chosen_dataset["Location"])
             chosen_dataset["latitude"] = chosen_dataset["latitude"].apply(
                 lambda x: self.dict_of_locations[x]["latitude"])
+            if self.normalize:
+                chosen_dataset["latitude"] = chosen_dataset["latitude"].apply(lambda x: abs(x+12.46044))
 
         return chosen_dataset
 
