@@ -1,4 +1,9 @@
-class RainToNumerical():
+import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin, ClassifierMixin
+import pandas as pd
+
+
+class RainToNumerical(BaseEstimator, TransformerMixin):
     def __init__(self, columns=["RainToday", "RainTomorrow"]):
         self.columns = columns
         self.di = {"No":0, "Yes":1}
@@ -12,7 +17,7 @@ class RainToNumerical():
             cur[col] = cur[col].map(self.di)
         return cur
 
-class WindToDegrees():
+class WindToDegrees(BaseEstimator, TransformerMixin):
     def __init__(self, columns=["WindGustDir", "WindDir9am", "WindDir3pm"]):
         self.columns = columns
         self.di = {}
@@ -31,7 +36,7 @@ class WindToDegrees():
             cur[col] = cur[col].map(self.di)
         return cur
 
-class RemoveOutliers():
+class RemoveOutliers(BaseEstimator, TransformerMixin):
     def __init__(self, scope=3.5): #scope is a std multiplier - the smaller it is the more values will be treated as outliers
         self.scope=scope
         self.columns = []
@@ -50,7 +55,10 @@ class RemoveOutliers():
         for col in self.columns:
             mean, std = self.MeanAndStd[col]
             cutOff = std * self.scope
-            cur = cur[cur[col] >= mean - cutOff & cur[col] <= mean + cutOff & ~cur[col].isnull()]
+            nans = cur[cur[col].isnull()]
+            cur = cur[cur[col] >= mean - cutOff]
+            cur = cur[cur[col] <= mean + cutOff]
+            cur = pd.concat([cur, nans])
         #print(len(cur.Location.unique()))
         print("Removed: {}".format(len(X[col]) - len(cur[col])))
         #print(len(cur[cur["RainTomorrow"] == "No"]), len(cur[cur["RainTomorrow"] == "Yes"]))
