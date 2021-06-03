@@ -162,12 +162,13 @@ class FeaturesFromDate(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
+
         # Warning the result is sometimes negative.
         copied_dataset = X.copy()
         copied_dataset["Date"] = pd.to_datetime(copied_dataset["Date"])
-        copied_dataset['Week_Number'] = pd.to_numeric(copied_dataset['Date'].dt.isocalendar().week)
-        copied_dataset['Year'] = pd.to_numeric(copied_dataset['Date'].dt.isocalendar().year)
+        copied_dataset['Week_Number'] = pd.to_numeric(copied_dataset['Date'].dt.isocalendar().week, downcast='float')
+        copied_dataset['Year'] = pd.to_numeric(copied_dataset['Date'].dt.isocalendar().year, downcast='float')
         if self.drop_date:
-            copied_dataset = copied_dataset.drop(columns=["Date"])
+            copied_dataset = copied_dataset.drop(columns=["Date"]) #, "Year", "Week_Number"
 
         return copied_dataset
