@@ -127,8 +127,8 @@ class NormalizeContinuousFeatures(BaseEstimator, TransformerMixin):
             self.scaler.fit(X[self.columns_to_normalize])
         else:
             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-            numeric_columns = X.select_dtypes(include=np.number).columns.tolist()
-            self.scaler.fit(X[numeric_columns])
+            self.columns_to_normalize = X.select_dtypes(include=np.number).columns.tolist()
+            self.scaler.fit(X[self.columns_to_normalize])
         return self
 
     def transform(self, X):

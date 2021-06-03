@@ -13,14 +13,14 @@ rain_data = pd.read_csv(FILE_PATH)
 if __name__ == "__main__":
     print(rain_data.head(3))
     #print(rain_data.dtypes)
-    numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-    numeric_columns = rain_data.select_dtypes(include=np.number).columns.tolist()
+    # numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+    # numeric_columns = rain_data.select_dtypes(include=np.number).columns.tolist()
+    #
+    # print(numeric_columns)
 
-    print(numeric_columns)
-
-    # transformer = NormalizeContinuousFeatures(preprocessing.StandardScaler(), None)
-    # rain_data = transformer.fit_transform(rain_data)
-    # print(rain_data.head(3))
+    transformer = NormalizeContinuousFeatures(preprocessing.StandardScaler(), None)
+    rain_data = transformer.fit_transform(rain_data)
+    print(rain_data.head(3))
 
 
     # columns_to_normalize = ["MinTemp", "MaxTemp"]
