@@ -4,6 +4,7 @@ from geopy.geocoders import Nominatim
 import json
 import numpy as np
 from sklearn.impute import SimpleImputer
+import pandas as pd
 
 
 class MaxMinTempDifference(BaseEstimator, TransformerMixin):
@@ -142,29 +143,26 @@ class NormalizeContinuousFeatures(BaseEstimator, TransformerMixin):
 class MeanNANImputer(NormalizeContinuousFeatures):
     def __init__(self, columns_to_normalize=None) -> None:
         super().__init__(SimpleImputer(missing_values=np.nan, strategy='mean'), columns_to_normalize)
-        if columns_to_normalize is not None:
-            self.columns_to_normalize = columns_to_normalize
-        else:
-            self.columns_to_normalize = None
+        # if columns_to_normalize is not None:
+        #     self.columns_to_normalize = columns_to_normalize
+        # else:
+        #     self.columns_to_normalize = None
 
-# class MeanNANImputer(BaseEstimator, TransformerMixin):
-#     def __init__(self, columns_to_normalize=None) -> None:
-#         self.scaler = SimpleImputer(missing_values=np.nan, strategy='mean')
-#         if columns_to_normalize is not None:
-#             self.columns_to_normalize = columns_to_normalize
-#         else:
-#             self.columns_to_normalize = None
-#
-#     def fit(self, X, y=None):
-#         if self.columns_to_normalize is not None:
-#             self.scaler.fit(X[self.columns_to_normalize])
-#         else:
-#             numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-#             self.columns_to_normalize = X.select_dtypes(include=np.number).columns.tolist()
-#             self.scaler.fit(X[self.columns_to_normalize])
-#         return self
-#
-#     def transform(self, X):
-#         X_scaled = X.copy()
-#         X_scaled[self.columns_to_normalize] = self.scaler.transform(X_scaled[self.columns_to_normalize])
-#         return X_scaled
+
+class FeaturesFromDate(BaseEstimator, TransformerMixin):
+    def __init__(self, drop_date=False) -> None:
+        self.drop_date = drop_date
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        # Warning the result is sometimes negative.
+        copied_dataset = X.copy()
+        copied_dataset["Date"] = pd.to_datetime(copied_dataset["Date"])
+        copied_dataset['Week_Number'] = copied_dataset['Date'].dt.isocalendar().week
+        copied_dataset['Year'] = copied_dataset['Date'].dt.isocalendar().year
+        if self.drop_date:
+            copied_dataset = copied_dataset.drop(columns=["Date"])
+
+        return copied_dataset
